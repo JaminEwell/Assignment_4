@@ -7,23 +7,23 @@ const productsDB = [
   {
     id: 1,
     Category: 'Shirts',
-    Price: 20,
-    Name: 'The Neon Teeshirt',
-    Image: 'https://img.ltwebstatic.com/images2_pi/2019/06/05/1559719007738600149_thumbnail_900x1199.webp'
+    Price: 15,
+    Name: 'T-Shirt',
+    Image: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
   },
   {
     id: 2,
     Category: 'Jeans',
-    Price: 89,
-    Name: 'Levis',
-    Image: 'https://cdn.shopify.com/s/files/1/0026/8464/9531/products/19_H1_18882-0179_Front_199_UR_1200x1200.jpg'
+    Price: 68,
+    Name: 'Pants',
+    Image: 'https://images.unsplash.com/photo-1611900376362-a996ff67f4d4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=562&q=80'
   },
   {
     id: 3,
     Category: 'Jeans',
     Price: 189,
-    Name: 'Gap',
-    Image: 'https://cdn.shopify.com/s/files/1/0026/8464/9531/products/19_H1_18882-0179_Front_199_UR_1200x1200.jpg'
+    Name: 'Shorts',
+    Image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
   }
 ]
 
