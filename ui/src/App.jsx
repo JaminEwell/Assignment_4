@@ -1,3 +1,23 @@
+
+/* eslint "react/react-in-jsx-scope": "off" */
+/* globals React ReactDOM */
+/* eslint "react/jsx-no-undef": "off" */
+/* eslint "react/no-multi-comp": "off" */
+/* eslint "no-alert": "off" */
+
+
+async function graphQLFetch(query, variables = {}) {
+  const response = await fetch(window.ENV.UI_API_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables })
+  })
+  const body = await response.text()
+  const result = JSON.parse(body)
+  return result.data
+}
+
+
 class ProductFilter extends React.Component {
     render() {
       return (
@@ -112,23 +132,26 @@ class ProductFilter extends React.Component {
             image
           }
         }`;
-        // add product data
-        const response = await fetch('/graphql', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({ query })
-        });
-        const result = await response.json();
-        this.setState({ issues: result.data.productList });
-       }
 
-      createProduct(product) {
-        product.id = this.state.products.length + 1;
-        product.price = '$' + product.price;
-        product.image = <a href={product.image}>View</a>
-        const newProductList = this.state.products.slice();
-        newProductList.push(product);
-        this.setState({ products: newProductList });
+
+        const data = await graphQLFetch(query)
+        if (data) {
+          this.setState({ products: data.productList })
+        }
+      }
+
+
+      async createProduct(product) {
+        const query = `mutation productAdd($product: ProductInputs!) {
+          productAdd(product: $product) {
+            id 
+          }
+        }`
+    
+        const data = await graphQLFetch(query, { product })
+        if (data) {
+          this.loadData()
+        }
       }
 
     render() {

@@ -4,6 +4,8 @@
   "description": "CSD648.2 api part",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon -e js,graphql -w . -w .env server.js",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jamin ewell",

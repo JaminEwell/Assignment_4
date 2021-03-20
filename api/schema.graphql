@@ -22,3 +22,12 @@ type Product {
     category: Category!
     image: String
 }
+
+input ProductInputs {
+  Category: CategoryList
+  Name: String!
+  Price: Float
+  Image: String
+}
+
+scalar GraphQLDate
