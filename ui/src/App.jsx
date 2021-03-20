@@ -18,13 +18,7 @@ async function graphQLFetch(query, variables = {}) {
 }
 
 
-class ProductFilter extends React.Component {
-    render() {
-      return (
-        <div>Showing all available products</div>
-      );
-    }
-  }
+
 
   function ProductRow(props)  {
         const product = props.product;
@@ -37,6 +31,14 @@ class ProductFilter extends React.Component {
             <td>{product.image}</td>
           </tr>
         );
+  }
+
+  class ProductFilter extends React.Component {
+    render() {
+      return (
+        <div>Showing all available products</div>
+      );
+    }
   }
 
   

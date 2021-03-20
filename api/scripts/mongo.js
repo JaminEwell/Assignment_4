@@ -1,68 +1,68 @@
-require('dotenv').config()
-const { MongoClient } = require('mongodb')
+require('dotenv').config();
+const { MongoClient } = require('mongodb');
 
-const url = process.env.DB_URL || 'mongodb+srv://jamin:siw0KrMZ8Vm6ujLs@cluster0.lhl98.mongodb.net/InventoryDB?retryWrites=true&w=majority'
+const url = process.env.DB_URL || 'mongodb+srv://jamin:siw0KrMZ8Vm6ujLs@cluster0.lhl98.mongodb.net/InventoryDB?retryWrites=true&w=majority';
 
 function testWithCallbacks(callback) {
-  console.log('\n--- testWithCallbacks ---')
-  const client = new MongoClient(url, { useNewUrlParser: true })
-  client.connect(connErr => {
+  console.log('\n--- testWithCallbacks ---');
+  const client = new MongoClient(url, { useNewUrlParser: true });
+  client.connect((connErr) => {
     if (connErr) {
-      callback(connErr)
-      return
+      callback(connErr);
+      return;
     }
-    console.log('Connected to MongoDB URL', url)
+    console.log('Connected to MongoDB URL', url);
 
-    const db = client.db()
-    const collection = db.collection('products')
+    const db = client.db();
+    const collection = db.collection('products');
 
-    const product = { id: 1, name: 'A. Callback', price: 23 }
+    const product = { id: 1, name: 'A. Callback', price: 23 };
     collection.insertOne(product, (insertErr, result) => {
       if (insertErr) {
-        client.close()
-        callback(insertErr)
-        return
+        client.close();
+        callback(insertErr);
+        return;
       }
-      console.log('Result of insert:\n', result.insertedId)
+      console.log('Result of insert:\n', result.insertedId);
       collection.find({ _id: result.insertedId }).toArray((findErr, docs) => {
         if (findErr) {
-          client.close()
-          callback(findErr)
-          return
+          client.close();
+          callback(findErr);
+          return;
         }
-        console.log('Result of find:\n', docs)
-        client.close()
-        callback()
-      })
-    })
-  })
+        console.log('Result of find:\n', docs);
+        client.close();
+        callback();
+      });
+    });
+  });
 }
 
 async function testWithAsync() {
-  console.log('\n--- testWithAsync ---')
-  const client = new MongoClient(url, { useNewUrlParser: true })
+  console.log('\n--- testWithAsync ---');
+  const client = new MongoClient(url, { useNewUrlParser: true });
   try {
-    await client.connect()
-    console.log('Connected to MongoDB URL', url)
-    const db = client.db()
-    const collection = db.collection('products')
+    await client.connect();
+    console.log('Connected to MongoDB URL', url);
+    const db = client.db();
+    const collection = db.collection('products');
 
-    const product = { id: 2, name: 'B. Async', price: 16 }
-    const result = await collection.insertOne(product)
-    console.log('Result of insert:\n', result.insertedId)
+    const product = { id: 2, name: 'B. Async', price: 16 };
+    const result = await collection.insertOne(product);
+    console.log('Result of insert:\n', result.insertedId);
 
-    const docs = await collection.find({ _id: result.insertedId }).toArray()
-    console.log('Result of find:\n', docs)
+    const docs = await collection.find({ _id: result.insertedId }).toArray();
+    console.log('Result of find:\n', docs);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   } finally {
-    client.close()
+    client.close();
   }
 }
 
-testWithCallbacks(err => {
+testWithCallbacks((err) => {
   if (err) {
-    console.log(err)
+    console.log(err);
   }
-  testWithAsync()
-})
+  testWithAsync();
+});
